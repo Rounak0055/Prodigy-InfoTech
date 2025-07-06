@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Weather App</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #74ebd5, #ACB6E5);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+      min-height: 100vh;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      color: #222;
+    }
+
+    .weather-container {
+      background: #fff;
+      border-radius: 12px;
+      padding: 25px;
+      width: 320px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      text-align: center;
+    }
+
+    input {
+      padding: 10px;
+      width: 80%;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      margin-bottom: 10px;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #3498db;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-bottom: 20px;
+    }
+
+    button:hover {
+      background-color: #2980b9;
+    }
+
+    .info {
+      font-size: 16px;
+      color: #333;
+    }
+
+    .info p {
+      margin: 8px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🌤️ Weather App</h1>
+
+  <div class="weather-container">
+    <input type="text" id="cityInput" placeholder="Enter city name" />
+    <br />
+    <button onclick="getWeather()">Get Weather</button>
+    <div class="info" id="weatherInfo"></div>
+  </div>
+
+  <script>
+    const input = document.getElementById('cityInput');
+    const weatherInfo = document.getElementById('weatherInfo');
+
+    input.addEventListener('keydown', function (event) {
+      if (event.key === 'Enter') {
+        getWeather();
+      }
+    });
+
+    function getWeather() {
+      const city = input.value.trim();
+      if (!city) {
+        alert('Please enter a city name!');
+        return;
+      }
+
+      const url = `https://wttr.in/${encodeURIComponent(city)}?format=j1`;
+
+      fetch(url)
+        .then(response => response.json())
+        .then(data => {
+          const current = data.current_condition[0];
+          const weatherHTML = `
+            <h2>${city.toUpperCase()}</h2>
+            <p><strong>Condition:</strong> ${current.weatherDesc[0].value}</p>
+            <p><strong>🌡️ Temp:</strong> ${current.temp_C}°C</p>
+            <p><strong>💧 Humidity:</strong> ${current.humidity}%</p>
+            <p><strong>💨 Wind:</strong> ${current.windspeedKmph} km/h</p>
+          `;
+          weatherInfo.innerHTML = weatherHTML;
+        })
+        .catch(() => {
+          weatherInfo.innerHTML = `<p>⚠️ Failed to fetch weather. Try again later.</p>`;
+        });
+    }
+  </script>
+
+</body>
+</html>
