@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tic-Tac-Toe: Multi Mode</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f0f2f5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: start;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    h1 {
+      margin-bottom: 10px;
+      color: #333;
+    }
+
+    .controls {
+      margin-bottom: 20px;
+    }
+
+    select, button {
+      margin: 5px;
+      padding: 10px;
+      font-size: 1rem;
+    }
+
+    .board {
+      display: grid;
+      grid-template-columns: repeat(3, 100px);
+      grid-template-rows: repeat(3, 100px);
+      gap: 5px;
+    }
+
+    .cell {
+      background-color: white;
+      border: 2px solid #007bff;
+      font-size: 2.5rem;
+      color: #007bff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .status {
+      margin-top: 20px;
+      font-size: 1.2rem;
+      color: #555;
+    }
+
+    .reset-btn {
+      margin-top: 10px;
+      padding: 10px 20px;
+      font-size: 1rem;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .reset-btn:hover {
+      background-color: #0056b3;
+    }
+    body {
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #1f1c2c, #928dab);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  min-height: 100vh;
+  padding: 30px;
+  color: white;
+}
+
+h1 {
+  margin-bottom: 10px;
+  color: #ffffff;
+  font-size: 2.5rem;
+  text-shadow: 1px 1px 5px #00000099;
+}
+
+.controls {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  padding: 15px 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+select, button {
+  margin: 5px;
+  padding: 10px 15px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  background-color: #ffffffcc;
+  color: #333;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+select:hover, button:hover {
+  background-color: #f0f0f0;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, 100px);
+  grid-template-rows: repeat(3, 100px);
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.cell {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(6px);
+  border-radius: 15px;
+  border: 2px solid #ffffff33;
+  font-size: 2.5rem;
+  color: #00f2ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.3s ease;
+}
+
+.cell:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: scale(1.05);
+}
+
+.status {
+  margin-top: 20px;
+  font-size: 1.3rem;
+  color: #ffffff;
+  text-shadow: 0 0 4px #00000088;
+}
+
+.reset-btn {
+  margin-top: 15px;
+  padding: 10px 25px;
+  font-size: 1rem;
+  background-color: #00d2ff;
+  background-image: linear-gradient(to right, #3a7bd5, #00d2ff);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.3s;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.reset-btn:hover {
+  background-image: linear-gradient(to right, #00d2ff, #3a7bd5);
+}
+
+  </style>
+</head>
+<body>
+
+  <h1>Tic-Tac-Toe</h1>
+
+ <div class="controls">
+  <label for="mode">Mode:</label>
+  <select id="mode" onchange="toggleDifficulty()">
+    <option value="human">Human vs Human</option>
+    <option value="ai">Human vs AI</option>
+  </select>
+
+  <span id="difficulty-container">
+    <label for="difficulty">AI Difficulty:</label>
+    <select id="difficulty">
+      <option value="easy">Easy</option>
+      <option value="medium">Medium</option>
+      <option value="hard">Hard</option>
+    </select>
+  </span>
+
+  <button onclick="resetGame()">Start Game</button>
+</div>
+
+
+    <button onclick="resetGame()">Start Game</button>
+  </div>
+
+  <div class="board" id="board"></div>
+  <div class="status" id="status">Choose a mode and start playing!</div>
+
+  <script>
+    const boardEl = document.getElementById('board');
+    const statusEl = document.getElementById('status');
+    const modeSelect = document.getElementById('mode');
+    const difficultySelect = document.getElementById('difficulty');
+
+    let cells = [];
+    let currentPlayer = 'X';
+    let gameActive = true;
+
+    function createBoard() {
+      boardEl.innerHTML = '';
+      cells = Array(9).fill(null).map((_, i) => {
+        const cell = document.createElement('div');
+        cell.classList.add('cell');
+        cell.dataset.index = i;
+        cell.addEventListener('click', handleClick);
+        boardEl.appendChild(cell);
+        return cell;
+      });
+    }
+
+    function handleClick(e) {
+      const index = e.target.dataset.index;
+
+      if (!gameActive || cells[index].textContent) return;
+
+      makeMove(index, currentPlayer);
+
+      if (checkWin(currentPlayer)) {
+        statusEl.textContent = `Player ${currentPlayer} wins!`;
+        gameActive = false;
+        return;
+      }
+
+      if (isDraw()) {
+        statusEl.textContent = 'It\'s a Draw!';
+        gameActive = false;
+        return;
+      }
+
+      if (modeSelect.value === 'ai' && currentPlayer === 'X') {
+        currentPlayer = 'O';
+        statusEl.textContent = 'AI\'s Turn...';
+        setTimeout(aiMove, 400);
+      } else {
+        currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+        statusEl.textContent = `Player ${currentPlayer}'s turn`;
+      }
+    }
+
+    function makeMove(index, player) {
+      cells[index].textContent = player;
+    }
+
+    function getAvailableMoves() {
+      return cells
+        .map((cell, i) => cell.textContent === '' ? i : null)
+        .filter(i => i !== null);
+    }
+
+    function isDraw() {
+      return cells.every(cell => cell.textContent !== '');
+    }
+
+    function checkWin(player) {
+      const combos = [
+        [0,1,2],[3,4,5],[6,7,8],
+        [0,3,6],[1,4,7],[2,5,8],
+        [0,4,8],[2,4,6]
+      ];
+      return combos.some(c =>
+        c.every(i => cells[i].textContent === player)
+      );
+    }
+
+    function aiMove() {
+      let move;
+      const difficulty = difficultySelect.value;
+
+      if (difficulty === 'easy') {
+        const options = getAvailableMoves();
+        move = options[Math.floor(Math.random() * options.length)];
+      } else if (difficulty === 'medium') {
+        move = getBestMoveMedium();
+      } else {
+        move = minimax('O').index;
+      }
+
+      makeMove(move, 'O');
+
+      if (checkWin('O')) {
+        statusEl.textContent = 'AI Wins!';
+        gameActive = false;
+        return;
+      }
+
+      if (isDraw()) {
+        statusEl.textContent = 'It\'s a Draw!';
+        gameActive = false;
+        return;
+      }
+
+      currentPlayer = 'X';
+      statusEl.textContent = 'Your Turn (X)';
+    }
+
+    function getBestMoveMedium() {
+      const options = getAvailableMoves();
+      for (let i of options) {
+        cells[i].textContent = 'O';
+        if (checkWin('O')) {
+          cells[i].textContent = '';
+          return i;
+        }
+        cells[i].textContent = '';
+      }
+      for (let i of options) {
+        cells[i].textContent = 'X';
+        if (checkWin('X')) {
+          cells[i].textContent = '';
+          return i;
+        }
+        cells[i].textContent = '';
+      }
+      return options[Math.floor(Math.random() * options.length)];
+    }
+
+    function minimax(player) {
+      const availSpots = getAvailableMoves();
+
+      if (checkWin('X')) return { score: -10 };
+      if (checkWin('O')) return { score: 10 };
+      if (availSpots.length === 0) return { score: 0 };
+
+      const moves = [];
+
+      for (let i of availSpots) {
+        cells[i].textContent = player;
+        let result = minimax(player === 'O' ? 'X' : 'O');
+        cells[i].textContent = '';
+        moves.push({ index: i, score: result.score });
+      }
+
+      let bestMove;
+      if (player === 'O') {
+        let maxScore = -Infinity;
+        for (let m of moves) {
+          if (m.score > maxScore) {
+            maxScore = m.score;
+            bestMove = m;
+          }
+        }
+      } else {
+        let minScore = Infinity;
+        for (let m of moves) {
+          if (m.score < minScore) {
+            minScore = m.score;
+            bestMove = m;
+          }
+        }
+      }
+
+      return bestMove;
+    }
+
+    function resetGame() {
+      currentPlayer = 'X';
+      gameActive = true;
+      createBoard();
+      statusEl.textContent = modeSelect.value === 'ai' ? 'Your Turn (X)' : 'Player X\'s turn';
+    }
+
+    // Initialize game
+    resetGame();
+    function toggleDifficulty() {
+  const mode = modeSelect.value;
+  const difficultyContainer = document.getElementById('difficulty-container');
+  difficultyContainer.style.display = mode === 'ai' ? 'inline' : 'none';
+}
+toggleDifficulty();
+
+  </script>
+
+</body>
+</html>
