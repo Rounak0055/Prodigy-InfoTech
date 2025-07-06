@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Future of Artificial Intelligence</title>
+  <title>The Rise of Quantum Computing</title>
   <style>
     * {
       margin: 0;
@@ -132,10 +132,10 @@
 
   <!-- Navigation -->
   <nav id="navbar">
-    <div class="logo">AI Future</div>
+    <div class="logo">Quantum Future</div>
     <ul class="nav-links">
       <li><a href="#home">Home</a></li>
-      <li><a href="#about">About AI</a></li>
+      <li><a href="#about">About Quantum</a></li>
       <li><a href="#applications">Applications</a></li>
       <li><a href="#trends">Future Trends</a></li>
       <li><a href="#contact">Contact</a></li>
@@ -144,35 +144,53 @@
 
   <!-- Sections -->
   <section id="home">
-    <h1>Welcome to the Future of AI</h1>
-    <p>Exploring how Artificial Intelligence is shaping the world</p>
-  </section>
+  <h1>The Rise of Quantum Computing</h1>
+  <p>Exploring how quantum technology is redefining the boundaries of computation</p>
+  <p style="max-width: 850px; margin: 20px auto 0; font-size: 1.2rem; line-height: 1.7;">
+    Quantum computing is no longer just theoretical — it's rapidly becoming a reality. As we enter a new era of computing, quantum processors are poised to solve problems that are impossible for even today’s most powerful supercomputers. 
+    From transforming cryptography to revolutionizing medicine and materials science, quantum computing represents one of the most profound technological shifts of our time.
+  </p>
+</section>
+
 
   <section id="about">
-    <h2>About Artificial Intelligence</h2>
+    <h2>About Quantum Computing</h2>
     <p>
-      Artificial Intelligence (AI) refers to the simulation of human intelligence in machines that are programmed to think and learn. From simple automation to complex neural networks, AI is transforming every sector from healthcare to finance.
+      Quantum computing leverages the principles of quantum mechanics — superposition, entanglement, and quantum tunneling — to process information in fundamentally different ways than classical computers. Qubits, the basic units of quantum information, can represent both 0 and 1 simultaneously, allowing parallel computation at an unprecedented scale.
+    </p>
+    <p>
+      The idea of quantum computing dates back to the 1980s, but only in the last decade has hardware caught up with theory. Today, companies like IBM, Google, and startups such as Rigetti and IonQ are building early quantum processors with growing capabilities.
     </p>
   </section>
 
   <section id="applications">
-    <h2>Applications of AI</h2>
+    <h2>Applications of Quantum Computing</h2>
     <p>
-      AI is being used in self-driving cars, virtual assistants like Alexa and Siri, fraud detection systems, recommendation engines on platforms like Netflix and Amazon, medical diagnosis, and even predictive maintenance in industries.
+      Quantum computing can revolutionize industries by solving problems that are intractable for classical computers. In healthcare, it can simulate complex molecules for drug discovery. In finance, it helps optimize portfolios and detect fraud. Logistics firms can use it to find optimal routes and scheduling solutions. Machine learning can benefit from quantum-enhanced algorithms that accelerate training and classification.
+    </p>
+    <p>
+      Governments and cybersecurity firms are also exploring quantum cryptography, which promises unbreakable encryption and secure communication networks resistant to quantum attacks.
     </p>
   </section>
 
   <section id="trends">
-    <h2>Future Trends in AI</h2>
+    <h2>Future Trends in Quantum Computing</h2>
     <p>
-      The future of AI includes general AI, emotional intelligence in robots, AI-generated content, autonomous systems, and ethical frameworks. AI is expected to work alongside humans in decision-making, creativity, and education.
+      In the coming years, quantum computing is expected to transition from research labs to real-world business and scientific applications. Advancements in quantum error correction and hardware stability are pushing us closer to “quantum advantage” — the point where quantum computers outperform the best classical supercomputers.
+    </p>
+    <p>
+      Cloud-based access to quantum computers is becoming more widespread, enabling developers to experiment with quantum code without owning expensive hardware. Educational institutions are integrating quantum computing into their curriculum, preparing a new generation of quantum developers and researchers.
     </p>
   </section>
 
   <section id="contact">
     <h2>Contact Us</h2>
     <p>
-      Have ideas or want to collaborate? Reach us at <strong>future@aiworld.com</strong>. Let's discuss the next big innovation in AI together.
+      Want to explore quantum innovation or collaborate with us? Reach out at <strong>future@quantumtech.com</strong>.
+      Let’s connect and shape the next era of computing together.
+    </p>
+    <p>
+      Follow us on LinkedIn, Twitter, and GitHub to stay updated on the latest quantum breakthroughs and community events.
     </p>
   </section>
 
